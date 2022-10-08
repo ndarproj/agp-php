@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Ndarproj\AxieGeneParser;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use Exception;
 use Ndarproj\AxieGeneParser\Models\BinBodySkin;
 use Ndarproj\AxieGeneParser\Models\BinClass;
