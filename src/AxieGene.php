@@ -67,7 +67,7 @@ class AxieGene
      * Getter for the class of the Axie.
      * @returns Class of the Axie.
      */
-    public function getCls(): Cls
+    public function getCls()
     {
         return $this->_genes->cls;
     }
@@ -76,7 +76,7 @@ class AxieGene
      * Getter for the region of the Axie.
      * @returns Region of the Axie.
      */
-    public function getRegion(): Region
+    public function getRegion()
     {
         return $this->_genes->region;
     }
@@ -85,7 +85,7 @@ class AxieGene
      * Getter for the tag associated with the Axie.
      * @returns Tag associated with the Axie.
      */
-    public function getTag(): Tag
+    public function getTag()
     {
         return $this->_genes->tag;
     }
@@ -94,7 +94,7 @@ class AxieGene
      * Getter for the body skin of the Axie.
      * @returns Skin of the Axie's body.
      */
-    public function getBodySkin(): BodySkin
+    public function getBodySkin()
     {
         return $this->_genes->bodySkin;
     }
