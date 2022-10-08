@@ -225,7 +225,7 @@ class AxieGene
         $obj->region = $this->parseRegion()->value;
         $obj->tag = $this->parseTag()->value;
         $obj->bodySkin = $this->parseBodySkin()->value;
-        $obj->parsePatternGenes = $this->parsePatternGenes();
+        $obj->pattern = $this->parsePatternGenes();
         $obj->color = $this->parseColorGenes();
         $obj->eyes = $this->parsePart($this->geneBinGroup->eyes, PartType::Eyes);
         $obj->ears = $this->parsePart($this->geneBinGroup->ears, PartType::Ears);
