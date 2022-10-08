@@ -1,6 +1,7 @@
 {
   "name": "ndarproj/agp-php",
   "description": "Axie genes parser tool",
+  "type": "library",
   "keywords": [
     "axie",
     "axie-infinity",
