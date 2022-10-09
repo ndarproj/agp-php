@@ -349,7 +349,6 @@ class AxieGene
         $patternGenes['r1'] = substr($this->geneBinGroup['pattern'], $bSize, $bSize);
         $patternGenes['r2'] = substr($this->geneBinGroup['pattern'], $bSize * 2, $bSize);
 
-        print_r($patternGenes);
         return $patternGenes;
     }
 
@@ -374,7 +373,6 @@ class AxieGene
         $colorGenes['r1'] = $clsColor[$r1Val] ?? $dVal;
         $colorGenes['r2'] = $clsColor[$r2Val] ?? $dVal;
 
-        print_r($this->geneBinGroup);
         return $colorGenes;
     }
 
@@ -579,7 +577,6 @@ class AxieGene
     private function getPartQuality($part): float
     {
         $cls = $this->_genes['cls'];
-        print_r($part);
         $partQuality = 0;
         $partQuality += $part['d']['cls'] === $cls ? 76 / 6 : 0;
         $partQuality += $part['r1']['cls'] === $cls ? 3 : 0;
