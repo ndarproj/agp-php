@@ -17,7 +17,6 @@ use Ndarproj\AxieGeneParser\Models\PartSkin;
 use Ndarproj\AxieGeneParser\Models\PartType;
 use Ndarproj\AxieGeneParser\Models\Region;
 use Ndarproj\AxieGeneParser\Models\Tag;
-use stdClass;
 
 
 enum HexType: int
@@ -58,7 +57,7 @@ class AxieGene
      * Getter for all of the details of the Axie's gene.
      * @returns Objects that contains all of the details about of the Axie's gene.
      */
-    public function getGenes()
+    public function getGenes(): array
     {
         return $this->_genes;
     }
@@ -67,108 +66,108 @@ class AxieGene
      * Getter for the class of the Axie.
      * @returns Class of the Axie.
      */
-    public function getCls()
+    public function getCls(): array
     {
-        return $this->_genes->cls;
+        return $this->_genes['cls'];
     }
 
     /**
      * Getter for the region of the Axie.
      * @returns Region of the Axie.
      */
-    public function getRegion()
+    public function getRegion(): array
     {
-        return $this->_genes->region;
+        return $this->_genes['region'];
     }
 
     /**
      * Getter for the tag associated with the Axie.
      * @returns Tag associated with the Axie.
      */
-    public function getTag()
+    public function getTag(): array
     {
-        return $this->_genes->tag;
+        return $this->_genes['tag'];
     }
 
     /**
      * Getter for the body skin of the Axie.
      * @returns Skin of the Axie's body.
      */
-    public function getBodySkin()
+    public function getBodySkin(): array
     {
-        return $this->_genes->bodySkin;
+        return $this->_genes['bodySkin'];
     }
 
     /**
      * Getter for the pattern genes of the Axie.
      * @returns Genes for the Axie's pattern.
      */
-    public function getPattern()
+    public function getPattern(): array
     {
-        return $this->_genes->pattern;
+        return $this->_genes['pattern'];
     }
 
     /**
      * Getter for the color genes of the Axie.
      * @returns Genes for the Axie's color.
      */
-    public function getColor()
+    public function getColor(): array
     {
-        return $this->_genes->color;
+        return $this->_genes['color'];
     }
 
     /**
      * Getter for the eye genes of the Axie.
      * @returns Genes for the Axie's eye.
      */
-    public function getEyes()
+    public function getEyes(): array
     {
-        return $this->_genes->eyes;
+        return $this->_genes['eyes'];
     }
 
     /**
      * Getter for the ears genes of the Axie.
      * @returns Genes for the Axie's ears.
      */
-    public function getEars()
+    public function getEars(): array
     {
-        return $this->_genes->ears;
+        return $this->_genes['ears'];
     }
 
     /**
      * Getter for the horn genes of the Axie.
      * @returns Genes for the Axie's horns.
      */
-    public function getHorn()
+    public function getHorn(): array
     {
-        return $this->_genes->horn;
+        return $this->_genes['horn'];
     }
 
     /**
      * Getter for the mouth genes of the Axie.
      * @returns Genes for the Axie's mouth.
      */
-    public function getMouth()
+    public function getMouth(): array
     {
-        return $this->_genes->mouth;
+        return $this->_genes['mouth'];
     }
 
     /**
      * Getter for the back genes of the Axie.
      * @returns Genes for the Axie's back.
      */
-    public function getBack()
+    public function getBack(): array
     {
-        return $this->_genes->back;
+        return $this->_genes['back'];
     }
 
     /**
      * Getter for the tail genes of the Axie.
      * @returns Genes for the Axie's tail.
      */
-    public function getTail()
+    public function getTail(): array
     {
-        return $this->_genes->tail;
+        return $this->_genes['tail'];
     }
 
     /**
@@ -195,20 +194,20 @@ class AxieGene
         $hexBin = str_pad($hexBin, $this->_hexType, "0", STR_PAD_LEFT);
 
         // Divide the binary values into their respective groups.
-        $groups = new stdClass();
-        $groups->cls = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 0, 4) : substr($hexBin, 0, 5);
-        $groups->region = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 8, 5) : substr($hexBin, 22, 18);
-        $groups->tag = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 13, 5) : substr($hexBin, 40, 15);
-        $groups->bodySkin = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 18, 4) : substr($hexBin, 61, 4);
-        $groups->xMas = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 22, 12) : "";
-        $groups->pattern = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 34, 18) : substr($hexBin, 65, 27);
-        $groups->color = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 52, 12) : substr($hexBin, 92, 18);
-        $groups->eyes = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 64, 32) : substr($hexBin, 149, 43);
-        $groups->mouth = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 96, 32) : substr($hexBin, 213, 43);
-        $groups->ears = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 128, 32) : substr($hexBin, 277, 43);
-        $groups->horn = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 160, 32) : substr($hexBin, 341, 43);
-        $groups->back = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 192, 32) : substr($hexBin, 405, 43);
-        $groups->tail = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 224, 32) : substr($hexBin, 469, 43);
+        $groups = [];
+        $groups['cls'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 0, 4) : substr($hexBin, 0, 5);
+        $groups['region'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 8, 5) : substr($hexBin, 22, 18);
+        $groups['tag'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 13, 5) : substr($hexBin, 40, 15);
+        $groups['bodySkin'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 18, 4) : substr($hexBin, 61, 4);
+        $groups['xMas'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 22, 12) : "";
+        $groups['pattern'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 34, 18) : substr($hexBin, 65, 27);
+        $groups['color'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 52, 12) : substr($hexBin, 92, 18);
+        $groups['eyes'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 64, 32) : substr($hexBin, 149, 43);
+        $groups['mouth'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 96, 32) : substr($hexBin, 213, 43);
+        $groups['ears'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 128, 32) : substr($hexBin, 277, 43);
+        $groups['horn'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 160, 32) : substr($hexBin, 341, 43);
+        $groups['back'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 192, 32) : substr($hexBin, 405, 43);
+        $groups['tail'] = $this->_hexType === HexType::Bit256->value ? substr($hexBin, 224, 32) : substr($hexBin, 469, 43);
 
         return $groups;
     }
@@ -220,21 +219,21 @@ class AxieGene
      */
     private function parseGenes()
     {
-        $obj = new stdClass();
-        $obj->cls = $this->parseClass()->value;
-        $obj->region = $this->parseRegion()->value;
-        $obj->tag = $this->parseTag()->value;
-        $obj->bodySkin = $this->parseBodySkin()->value;
-        $obj->pattern = $this->parsePatternGenes();
-        $obj->color = $this->parseColorGenes();
-        $obj->eyes = $this->parsePart($this->geneBinGroup->eyes, PartType::Eyes);
-        $obj->ears = $this->parsePart($this->geneBinGroup->ears, PartType::Ears);
-        $obj->horn = $this->parsePart($this->geneBinGroup->horn, PartType::Horn);
-        $obj->mouth = $this->parsePart($this->geneBinGroup->mouth, PartType::Mouth);
-        $obj->back = $this->parsePart($this->geneBinGroup->back, PartType::Back);
-        $obj->tail = $this->parsePart($this->geneBinGroup->tail, PartType::Tail);
+        $genes = [];
+        $genes['cls'] = $this->parseClass()->value;
+        $genes['region'] = $this->parseRegion()->value;
+        $genes['tag'] = $this->parseTag()->value;
+        $genes['bodySkin'] = $this->parseBodySkin()->value;
+        $genes['pattern'] = $this->parsePatternGenes();
+        $genes['color'] = $this->parseColorGenes();
+        $genes['eyes'] = $this->parsePart($this->geneBinGroup['eyes'], PartType::Eyes);
+        $genes['ears'] = $this->parsePart($this->geneBinGroup['ears'], PartType::Ears);
+        $genes['horn'] = $this->parsePart($this->geneBinGroup['horn'], PartType::Horn);
+        $genes['mouth'] = $this->parsePart($this->geneBinGroup['mouth'], PartType::Mouth);
+        $genes['back'] = $this->parsePart($this->geneBinGroup['back'], PartType::Back);
+        $genes['tail'] = $this->parsePart($this->geneBinGroup['tail'], PartType::Tail);
 
-        return $obj;
+        return $genes;
     }
 
     /**
@@ -244,7 +243,7 @@ class AxieGene
      */
     private function parseClass(): Cls
     {
-        $ret = BinClass::get[(string)$this->geneBinGroup->cls];
+        $ret = BinClass::get[(string)$this->geneBinGroup['cls']];
         if (!$ret) {
             throw new Exception("cannot recognize class");
         }
@@ -258,18 +257,18 @@ class AxieGene
      */
     private function parseRegion(): Region
     {
-        $ret = BinRegion::get[(string)$this->geneBinGroup->region];
+        $ret = BinRegion::get[(string)$this->geneBinGroup['region']];
 
         if (!$ret) {
             // Check if the axie has any japanese parts for 512 bit genes.
             if ($this->_hexType === HexType::Bit512->value) {
-                if (substr($this->geneBinGroup->eyes, 0, 4) === "0011") return Region::Japan;
-                if (substr($this->geneBinGroup->mouth, 0, 4) === "0011") return Region::Japan;
-                if (substr($this->geneBinGroup->ears, 0, 4) === "0011") return Region::Japan;
-                if (substr($this->geneBinGroup->horn, 0, 4) === "0011") return Region::Japan;
-                if (substr($this->geneBinGroup->back, 0, 4) === "0011") return Region::Japan;
-                if (substr($this->geneBinGroup->tail, 0, 4) === "0011") return Region::Japan;
-                if ($this->geneBinGroup->region === "000000000000000000");
+                if (substr($this->geneBinGroup['eyes'], 0, 4) === "0011") return Region::Japan;
+                if (substr($this->geneBinGroup['mouth'], 0, 4) === "0011") return Region::Japan;
+                if (substr($this->geneBinGroup['ears'], 0, 4) === "0011") return Region::Japan;
+                if (substr($this->geneBinGroup['horn'], 0, 4) === "0011") return Region::Japan;
+                if (substr($this->geneBinGroup['back'], 0, 4) === "0011") return Region::Japan;
+                if (substr($this->geneBinGroup['tail'], 0, 4) === "0011") return Region::Japan;
+                if ($this->geneBinGroup['region'] === "000000000000000000");
             }
             throw new Exception("cannot recognize region");
         }
@@ -283,38 +282,38 @@ class AxieGene
      */
     private function parseTag(): Tag
     {
-        if ($this->geneBinGroup->tag === "000000000000000") {
+        if ($this->geneBinGroup['tag'] === "000000000000000") {
             $bionicParts = [
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->eyes, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['eyes'], 0, 4)
                 )->value,
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->ears, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['ears'], 0, 4)
                 )->value,
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->horn, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['horn'], 0, 4)
                 )->value,
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->mouth, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['mouth'], 0, 4)
                 )->value,
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->back, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['back'], 0, 4)
                 )->value,
                 $this->parsePartSkin(
-                    $this->geneBinGroup->region,
-                    substr($this->geneBinGroup->tail, 0, 4)
+                    $this->geneBinGroup['region'],
+                    substr($this->geneBinGroup['tail'], 0, 4)
                 )->value,
             ];
             return in_array(PartSkin::Bionic->value, $bionicParts)
                 ? Tag::Agamogenesis
                 : Tag::Default;
         }
-        $ret = BinTag::get[$this->geneBinGroup->tag];
+        $ret = BinTag::get[$this->geneBinGroup['tag']];
         if (!$ret) {
             throw new Exception("cannot recognize tag");
         }
@@ -328,7 +327,7 @@ class AxieGene
      */
     private function parseBodySkin(): BodySkin
     {
-        $ret = BinBodySkin::get[(string)$this->geneBinGroup->bodySkin];
+        $ret = BinBodySkin::get[(string)$this->geneBinGroup['bodySkin']];
         if (!$ret) {
             throw new Exception("cannot recognize body skin");
         }
@@ -342,15 +341,16 @@ class AxieGene
      */
     private function parsePatternGenes()
     {
-        $bSize = strlen($this->geneBinGroup->pattern) / 3;
+        $bSize = strlen($this->geneBinGroup['pattern']) / 3;
 
-        $obj = new stdClass();
-        $obj->d = substr($this->geneBinGroup->pattern, 0, $bSize);
-        $obj->r1 = substr($this->geneBinGroup->pattern, $bSize, $bSize);
-        $obj->r1 = substr($this->geneBinGroup->pattern, $bSize, $bSize);
-        $obj->r2 = substr($this->geneBinGroup->pattern, $bSize * 2, $bSize);
+        $patternGenes = [];
+        $patternGenes['d'] = substr($this->geneBinGroup['pattern'], 0, $bSize);
+        $patternGenes['r1'] = substr($this->geneBinGroup['pattern'], $bSize, $bSize);
+        $patternGenes['r1'] = substr($this->geneBinGroup['pattern'], $bSize, $bSize);
+        $patternGenes['r2'] = substr($this->geneBinGroup['pattern'], $bSize * 2, $bSize);
 
-        return $obj;
+        print_r($patternGenes);
+        return $patternGenes;
     }
 
     /**
@@ -360,21 +360,22 @@ class AxieGene
      */
     private function parseColorGenes()
     {
-        $bSize = strlen($this->geneBinGroup->color) / 3;
+        $bSize = strlen($this->geneBinGroup['color']) / 3;
         $cls = $this->parseClass();
         $clSKey = array_search($cls, array_column(ClassColor::get, 'class'));
         $clsColor = ClassColor::get[$clSKey][0];
 
-        $dVal = substr(substr($this->geneBinGroup->color, 0, $bSize), -4) ?? substr($this->geneBinGroup->color, 0, $bSize);
-        $r1Val = substr(substr($this->geneBinGroup->color, $bSize, $bSize), -4) ?? substr($this->geneBinGroup->color, $bSize, $bSize);
-        $r2Val = substr(substr($this->geneBinGroup->color, $bSize * 2, $bSize * 2), -4) ?? substr($this->geneBinGroup->color, $bSize, $bSize * 2);
+        $dVal = substr(substr($this->geneBinGroup['color'], 0, $bSize), -4) ?? substr($this->geneBinGroup['color'], 0, $bSize);
+        $r1Val = substr(substr($this->geneBinGroup['color'], $bSize, $bSize), -4) ?? substr($this->geneBinGroup['color'], $bSize, $bSize);
+        $r2Val = substr(substr($this->geneBinGroup['color'], $bSize * 2, $bSize * 2), -4) ?? substr($this->geneBinGroup['color'], $bSize, $bSize * 2);
 
-        $obj = new stdClass();
-        $obj->d = $clsColor[$dVal];
-        $obj->r1 = $clsColor[$r1Val];
-        $obj->r2 = $clsColor[$r2Val];
+        $colorGenes = [];
+        $colorGenes['d'] = $clsColor[$dVal] ?? $dVal;
+        $colorGenes['r1'] = $clsColor[$r1Val] ?? $dVal;
+        $colorGenes['r2'] = $clsColor[$r2Val] ?? $dVal;
 
-        return $obj;
+        print_r($this->geneBinGroup);
+        return $colorGenes;
     }
 
     /**
@@ -387,7 +388,7 @@ class AxieGene
     private function parsePart(string $partBin, PartType $partType)
     {
         // Get the region and skin values needed to parse the correct part gene
-        $regionBin = $this->geneBinGroup->region;
+        $regionBin = $this->geneBinGroup['region'];
 
         $dSkinBin =
             $this->_hexType === HexType::Bit256->value
@@ -449,13 +450,13 @@ class AxieGene
             $rSkin
         );
 
-        $obj = new stdClass();
-        $obj->d = $this->parsePartGene($partType, $dName);
-        $obj->r1 = $this->parsePartGene($partType, $r1Name);
-        $obj->r2 =  $this->parsePartGene($partType, $r2Name);
-        $obj->mystic = $dSkin === PartSkin::Mystic || $dSkinBin === "0001" ? 'true' : 'false';
+        $part = [];
+        $part['d'] = $this->parsePartGene($partType, $dName);
+        $part['r1'] = $this->parsePartGene($partType, $r1Name);
+        $part['r2'] =  $this->parsePartGene($partType, $r2Name);
+        $part['mystic'] = $dSkin === PartSkin::Mystic || $dSkinBin === "0001" ? 'true' : 'false';
 
-        return $obj;
+        return $part;
     }
 
     /**
@@ -522,14 +523,14 @@ class AxieGene
         if (!$partJson) {
             throw new Exception("cannot recognize part gene");
         } else {
-            $obj = new stdClass();
-            $obj->cls = $partJson['class'];
-            $obj->name = $partJson['name'];
-            $obj->partId = $partId;
-            $obj->specialGenes = $partJson['specialGenes'];
-            $obj->type = $partJson['type'];
+            $partGene = [];
+            $partGene['cls'] = $partJson['class'];
+            $partGene['name'] = $partJson['name'];
+            $partGene['partId'] = $partId;
+            $partGene['specialGenes'] = $partJson['specialGenes'];
+            $partGene['type'] = $partJson['type'];
 
-            return $obj;
+            return $partGene;
         }
     }
 
@@ -544,7 +545,7 @@ class AxieGene
     {
         $ret = BinPartSkin::get[$skinBin] ?? null;
         if ($skinBin === "00") {
-            if ($this->geneBinGroup->xMas === "010101010101") $ret = PartSkin::Xmas1;
+            if ($this->geneBinGroup['xMas'] === "010101010101") $ret = PartSkin::Xmas1;
             else $ret = BinPartSkin::get[$regionBin];
         }
         if (!$ret) {
@@ -559,12 +560,12 @@ class AxieGene
     public function getGeneQuality(): float
     {
         $geneQuality = 0;
-        $geneQuality += $this->getPartQuality($this->_genes->eyes);
-        $geneQuality += $this->getPartQuality($this->_genes->ears);
-        $geneQuality += $this->getPartQuality($this->_genes->mouth);
-        $geneQuality += $this->getPartQuality($this->_genes->horn);
-        $geneQuality += $this->getPartQuality($this->_genes->back);
-        $geneQuality += $this->getPartQuality($this->_genes->tail);
+        $geneQuality += $this->getPartQuality($this->_genes['eyes']);
+        $geneQuality += $this->getPartQuality($this->_genes['ears']);
+        $geneQuality += $this->getPartQuality($this->_genes['mouth']);
+        $geneQuality += $this->getPartQuality($this->_genes['horn']);
+        $geneQuality += $this->getPartQuality($this->_genes['back']);
+        $geneQuality += $this->getPartQuality($this->_genes['tail']);
         return floatval(number_format($geneQuality, 2));
     }
 
@@ -577,15 +578,12 @@ class AxieGene
      */
     private function getPartQuality($part): float
     {
-        $cls = $this->_genes->cls;
+        $cls = $this->_genes['cls'];
+        print_r($part);
         $partQuality = 0;
-        $partQuality += $part->d->cls === $cls ? 76 / 6 : 0;
-        $partQuality += $part->r1->cls === $cls ? 3 : 0;
-        $partQuality += $part->r2->cls === $cls ? 1 : 0;
+        $partQuality += $part['d']['cls'] === $cls ? 76 / 6 : 0;
+        $partQuality += $part['r1']['cls'] === $cls ? 3 : 0;
+        $partQuality += $part['r2']['cls'] === $cls ? 1 : 0;
         return $partQuality;
     }
 }
-
-
-$test = new AxieGene("0x11c642400a028ca14a428c20cc011080c61180a0820180604233082");
-$test->getGeneQuality();
